@@ -89,6 +89,16 @@ services:
 # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
 ###> symfony/mercure-bundle ###
 ###< symfony/mercure-bundle ###
+  
+  front:
+    build: ./front
+    container_name: mealplanning-front
+    ports:
+      - "4200:4200"
+    working_dir: /var/www/html
+    volumes:
+      - ./front:/var/www/html
+    entrypoint: ng serve --host 0.0.0.0
 
 volumes:
   php_socket:
