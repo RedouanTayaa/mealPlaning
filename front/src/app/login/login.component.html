@@ -1,0 +1,75 @@
+<div class="container mx-auto px-4 h-full">
+  <div class="flex content-center items-center justify-center h-full">
+    <div class="w-full lg:w-4/12 px-4">
+      <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
+        <div class="rounded-t mb-0 px-6 py-6">
+          <div class="text-center mb-3">
+            <h6 class="text-blueGray-500 text-sm font-bold">Sign in</h6>
+          </div>
+        </div>
+        <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+          <form name="form"
+                (ngSubmit)="f.form.valid && onSubmit()"
+                #f="ngForm"
+                novalidate>
+            <div class="relative w-full mb-3">
+              <label for="email" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                Email
+              </label>
+              <input
+                type="text"
+                name="email"
+                [(ngModel)]="form.email"
+                required
+                #email="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && email.errors }"
+                placeholder="Email"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              <div *ngIf="email.errors && f.submitted" class="invalid-feedback">
+                Email is required!
+              </div>
+            </div>
+            <div class="relative w-full mb-3">
+              <label for="password" class="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                [(ngModel)]="form.password"
+                required
+                minlength="6"
+                #password="ngModel"
+                [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+                placeholder="Password"
+                class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+              <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+                <div *ngIf="password.errors['required']">
+                  Password is required
+                </div>
+                <div *ngIf="password.errors['minlength']">
+                  Password must be at least 6 characters
+                </div>
+              </div>
+            </div>
+            <div class="text-center mt-6">
+              <button type="submit" class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
+                Sign In
+              </button>
+            </div>
+            <div class="text-center mt-6" *ngIf="f.submitted && isLoginFailed">
+              <div class="alert alert-danger" role="alert">
+                Login failed: {{ errorMessage }}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="flex flex-wrap mt-6 relative">
+        <div class="w-1/2">
+          <a href="javascript:void(0)" (click)="forgotPassword()" class="text-blueGray-200"><small>Forgot password?</small></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
